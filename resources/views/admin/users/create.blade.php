@@ -1,16 +1,27 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Criar Novo Usuário')
-
+@section('title', 'Cadastrar Usuario')
 @section('content')
-    @include('admin.users.partials.breadcrumb')
-    <div class="py-6">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-4">
-            Novo Usuário
-        </h2>
-    </div>
-    {{-- @include('admin.includes.errors') --}}
-    <form action="{{ route('users.store') }}" method="POST">
-        @include('admin.users.partials.form')
+
+    <h1>Dio code e foda</h1>
+
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+
+    <form action="{{ route('users.store') }}" method="post">
+        @csrf()
+        <input type="text" name="name" placeholder="Nome" value="{{old('name')}}">
+        <input type="email" name="email" placeholder="E-mail"  value="{{old('email')}}">
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit"> Enviar</button>
     </form>
-@endsection
+
+
+
+    @endsection
